@@ -1,86 +1,119 @@
-import { Card, Typography } from "@material-tailwind/react";
- 
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
- 
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const ViewBiodata = () => {
+    const { user } = useContext(AuthContext);
+
+    const [viewBiodata, setViewBiodata] = useState([]);
+    const url = `http://localhost:5000/userEdit?email=${user?.email}`;
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setViewBiodata(data))
+    }, [url]);
+
     return (
-        <div >
-            <div className="border-2 border-black w-full"> 
-                <h1>hello</h1>
-            </div>
-            <Card className="h-full w-full overflow-scroll">
-                <table className="w-full min-w-max table-auto text-left">
-                    <thead>
-                        <tr>
-                            {TABLE_HEAD.map((head) => (
-                                <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-normal leading-none opacity-70"
-                                    >
-                                        {head}
-                                    </Typography>
-                                </th>
-                            ))}
+        <div>
+            <table className="table-auto w-[900px] mt-24">
+                <thead className="border border-black">
+                    <tr className="border border-black">
+                        <th className="border px-4 py-2">Field</th>
+                        <th className="border px-4 py-2">Value</th>
+                    </tr>
+                </thead>
+
+
+                {viewBiodata.map((item, index) => (
+                <tbody key={index}>
+                    
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Name</td>
+                            <td className="border px-4 py-2">{item.name}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {TABLE_ROWS.map(({ name, job, date }, index) => (
-                            <tr key={name} className="even:bg-blue-gray-50/50">
-                                <td className="p-4">
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {name}
-                                    </Typography>
-                                </td>
-                                <td className="p-4">
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {job}
-                                    </Typography>
-                                </td>
-                                <td className="p-4">
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        {date}
-                                    </Typography>
-                                </td>
-                                <td className="p-4">
-                                    <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-                                        Edit
-                                    </Typography>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </Card>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Biodata Type</td>
+                            <td className="border px-4 py-2">{item.gendar}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.dateofbirth}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        <tr  className="border border-black">
+                            <td className="border px-4 py-2">Date of birth</td>
+                            <td className="border px-4 py-2">{item.email}</td>
+                        </tr>
+                        
+                   
+                </tbody>
+                 ))}
+
+
+            </table>
         </div>
     );
 };

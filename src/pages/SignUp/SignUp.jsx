@@ -2,11 +2,13 @@
 import {Card, Input, Typography,} from "@material-tailwind/react";
 
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../firebase/firebase.config";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function fileToUint8Array(file) {
     return new Promise((resolve, reject) => {
@@ -49,8 +51,23 @@ const SignUp = () => {
                         getDownloadURL(storageRef).then((downloadURL) => {
 
                             updateUserProfile(name, downloadURL)
+                            const userInfo = {name, profileImage: downloadURL, email, password}
+                            axios.post('http://localhost:5000/users', userInfo)
+                            .then(res=>{
+                                console.log(res.data)
+                                if(res.data.insertedId){
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Sign Up Successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                      });
+                                }
+                            })
                         });
                     });
+                   
                 })
                 .catch((error) => {
                     console.error(error);

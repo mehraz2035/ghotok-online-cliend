@@ -5,7 +5,7 @@
 //     const [biodataDetails, setBiodataDetails] = useState([]);
 //     const [loading, setLoading] = useState(true);
 //     useEffect(() => {
-//         fetch('https://ghotok-online-server.vercel.app/biodatas')
+//         fetch('http://localhost:5000/biodatas')
 //             .then(res => res.json())
 //             .then(data => {
 //                 setBiodataDetails(data);

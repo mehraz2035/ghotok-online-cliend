@@ -19,7 +19,7 @@ const BiodatasPage = () => {
     // const [biodatasPage, setBiodatasPage] = useState([]);
 
     // useEffect(() => {
-    //     fetch('https://ghotok-online-server.vercel.app/biodatas')
+    //     fetch('http://localhost:5000/biodatas')
     //         .then(res => res.json())
     //         .then(data => setBiodatasPage(data));
     // }, []);

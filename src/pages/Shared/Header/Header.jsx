@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
 import { Avatar } from "@material-tailwind/react";
+import useFavourites from "../../../hooks/useFavourites";
 
 
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [favourite] = useFavourites();
 
 
     const handleLogOut = () => {
@@ -18,13 +20,13 @@ const Header = () => {
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/biodatasPage'>Biodatas</Link></li>
-        {/* <li><Link to='/biodataDetails'>Biodata Details</Link></li> */}
+        
         <li><Link to='/addFood'>About Us</Link></li>
-        <li><Link to='/userBaseManagesFoods'>Contact Us</Link></li>
+        <li><Link to='/userBaseManagesFoods'>Contact Us +{favourite.length}</Link></li>
         {user?.email && (
             <li><Link to='/dashboard'>Dashboard</Link></li>
         )}
-        {/* <li><Link to='/signUp'>Register</Link></li> */}
+        
     </>
 
 

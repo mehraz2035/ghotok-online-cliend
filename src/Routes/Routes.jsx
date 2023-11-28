@@ -13,6 +13,10 @@ import EditBiodata from "../pages/DashBoard/EditBiodata/EditBiodata";
 import ViewBiodata from "../pages/DashBoard/ViewBiodata/ViewBiodata";
 import MyContactRequest from "../pages/DashBoard/MyContactRequest/MyContactRequest";
 import FavouritesBiodata from "../pages/DashBoard/FavouritesBiodata/FavouritesBiodata";
+import AdminDashboard from "../pages/DashBoard/AdminDashboard/AdminDashboard";
+import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
+import ApprovedContactRequest from "../pages/DashBoard/approvedContactRequest/ApprovedContactRequest";
+import CheckoutPage from "../pages/BiodataDetails/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,12 +29,12 @@ export const router = createBrowserRouter([
       },
       {
         path: 'biodatasPage',
-        element: <PrivateRoute><BiodatasPage></BiodatasPage></PrivateRoute>
+        element: <BiodatasPage></BiodatasPage>
       },
       {
         path: '/biodataDetails/:id',
         element: <BiodataDetails></BiodataDetails>
-        // loader: ({params}) => fetch(`https://ghotok-online-server.vercel.app/biodatasAll/${params.id}`)
+        // loader: ({params}) => fetch(`http://localhost:5000/biodatasAll/${params.id}`)
       },
       {
         path: 'login',
@@ -39,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: 'signUp',
         element: <SignUp></SignUp>
+      },
+      {
+        path: '/checkoutPage/:id',
+        element: <CheckoutPage></CheckoutPage>
       }
     ]
   },
@@ -61,6 +69,18 @@ export const router = createBrowserRouter([
       {
         path: 'favouritesBiodata',
         element: <FavouritesBiodata></FavouritesBiodata>
+      },
+      {
+        path: 'adminDashboard',
+        element: <AdminDashboard></AdminDashboard>
+      },
+      {
+        path: 'manageUsers',
+        element: <ManageUsers></ManageUsers>
+      },
+      {
+        path: 'approvedContactRequest',
+        element: <ApprovedContactRequest></ApprovedContactRequest>
       }
 
     ]
