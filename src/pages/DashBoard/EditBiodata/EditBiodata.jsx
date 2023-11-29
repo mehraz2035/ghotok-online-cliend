@@ -103,7 +103,7 @@ const EditBiodata = () => {
                         <label>
                             <span>Gender</span>
                         </label>
-                        <select name="gender" placeholder="Gender" className="border border-black" required>
+                        <select name="gender" placeholder="Gender"  required>
                             <option value="male">Male</option>
                             <option value="female">Female</option >
                             <option value="all">All</option>
