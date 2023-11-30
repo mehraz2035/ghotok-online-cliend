@@ -51,7 +51,7 @@ const SignUp = () => {
                         getDownloadURL(storageRef).then((downloadURL) => {
 
                             updateUserProfile(name, downloadURL)
-                            const userInfo = {name, profileImage: downloadURL, email, password}
+                            const userInfo = {name, profileImage: downloadURL, email}
                             axios.post('http://localhost:5000/users', userInfo)
                             .then(res=>{
                                 console.log(res.data)

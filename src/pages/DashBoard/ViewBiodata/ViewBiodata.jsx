@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { Button } from "@material-tailwind/react";
+import axios from "axios";
 
 const ViewBiodata = () => {
     const { user } = useContext(AuthContext);
@@ -13,22 +15,32 @@ const ViewBiodata = () => {
             .then(data => setViewBiodata(data))
     }, [url]);
 
+    const handlePremium = (email) => {
+
+        axios.post(`http://localhost:5000/make-premium/${email}`, { status: 'pending' })
+            .then(res => {
+                console.log(res.data)
+            })
+
+    }
+
     return (
         <div>
-            <table className="table-auto w-[900px] mt-24">
+            <h1 className=" text-center font-bold my-10">View Biodata</h1>
+            <table className="table-auto  mt-24 ">
                 <thead className="border border-black">
                     <tr className="border border-black">
-                        <th className="border px-4 py-2">USER DATA</th>
-                        <th className="border px-4 py-2">INFO</th>
+                        <th className="border px-4 py-2 w-[200px]">USER DATA</th>
+                        <th className="border px-4 py-2">INFORMSTION</th>
                     </tr>
                 </thead>
 
 
-                {viewBiodata.map((item, index) => (
-                    <tbody key={index}>
+                {viewBiodata?.map((item, index) => (
+                    <tbody key={index} >
 
                         <tr className="border border-black">
-                            <td className="border px-4 py-2">Biodata Type
+                            <td className="border px-4 py-2 w-[200px]">Biodata Type
                             </td>
                             <td className="border px-4 py-2">{item.gender}</td>
                         </tr>
@@ -40,7 +52,7 @@ const ViewBiodata = () => {
                         <tr className="border border-black">
                             <td className="border px-4 py-2">Profile Image
                             </td>
-                            <td className="border px-4 py-2">{item.profileImage
+                            <td className="border px-4 py-2 w-20">{item.profileImage
                             }</td>
                         </tr>
                         <tr className="border border-black">
@@ -48,7 +60,7 @@ const ViewBiodata = () => {
                             <td className="border px-4 py-2">{item.dateofbirth
                             }</td>
                         </tr>
-                        
+
                         <tr className="border border-black">
                             <td className="border px-4 py-2">Height</td>
                             <td className="border px-4 py-2">{item.height}</td>
@@ -84,7 +96,7 @@ const ViewBiodata = () => {
                             <td className="border px-4 py-2">{item.mothersName}</td>
                         </tr>
                         <tr className="border border-black">
-                            <td className="border px-4 py-2">Permanent Division name</td>
+                            <td className="border px-4 py-2">Permanent Division</td>
                             <td className="border px-4 py-2">{item.permanentDivision}</td>
                         </tr>
                         <tr className="border border-black">
@@ -96,7 +108,7 @@ const ViewBiodata = () => {
                             <td className="border px-4 py-2">{item.expectedPartnerAge}</td>
                         </tr>
                         <tr className="border border-black">
-                            <td className="border px-4 py-2">Expected Partner Height</td>
+                            <td className="border px-4 py-2 ">Expected Partner Height</td>
                             <td className="border px-4 py-2">{item.expectedPartnerHeight}</td>
                         </tr>
                         <tr className="border border-black">
@@ -113,10 +125,7 @@ const ViewBiodata = () => {
                             <td className="border px-4 py-2">Mobile Number</td>
                             <td className="border px-4 py-2">{item.mobileNumber}</td>
                         </tr>
-                        <tr className="border border-black">
-                            <td className="border px-4 py-2">Premium</td>
-                            <td className="border px-4 py-2">{item.email}</td>
-                        </tr>
+
 
 
                     </tbody>
@@ -124,6 +133,12 @@ const ViewBiodata = () => {
 
 
             </table>
+            <div className="my-10 flex justify-center items-center font-bold ">
+                <h1>Do you want to premium your profile?</h1>
+                <div className="flex items-center ">
+                    <Button onClick={() => handlePremium(user?.email)} className=" bg-black h-10 ml-5">Yes! Premium</Button>
+                </div>
+            </div>
         </div>
     );
 };

@@ -2,31 +2,31 @@ import { NavLink, Outlet } from "react-router-dom";
 
 
 const DashBoard = () => {
+
+    const isAdmin = true;
     return (
         <div className="flex">
             {/* side bar */}
             <div className="w-64 mr-40 min-h-screen bg-[#213555] text-white py-4">
                 <ul className="p-4">
-                    {/* {
-                        idAdmin ?
-                            <> */}
-                                <li>
-                                    <NavLink to='/dashBoard/adminDashboard'>Admin Dashboard</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/dashBoard/manageUsers'>Manage Users
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/dashBoard/approvedPremium'>Approved Premium
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/dashBoard/approvedContactRequest'>Approved Contact Request</NavLink>
-                                </li>
-                            {/* </>
-                            :
-                            <> */}
+                    {
+                        isAdmin ? <>
+                            <li>
+                                <NavLink to='/dashBoard/adminDashboard'>Admin Dashboard</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/dashBoard/manageUsers'>Manage Users
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/dashBoard/adminApprovedPremium'>Admin Approved Premium
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/dashBoard/approvedContactRequest'>Approved Contact Request</NavLink>
+                            </li>
+                        </> :
+                            <>
                                 <li>
                                     <NavLink to='/dashBoard/editBiodata'>Edit Biodata</NavLink>
                                 </li>
@@ -39,8 +39,12 @@ const DashBoard = () => {
                                 <li>
                                     <NavLink to='/dashBoard/favouritesBiodata'>Favourites Biodata</NavLink>
                                 </li>
-                            {/* </>
-                    // {admin} */}
+                            </>
+                    }
+
+
+
+
                     <div className="border"></div>
 
                     <li>

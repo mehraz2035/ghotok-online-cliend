@@ -1,22 +1,16 @@
-import React, { useContext } from "react";
+
 import {
     Button,
-    Dialog,
-    DialogHeader,
-    DialogBody,
-    DialogFooter,
     Typography,
 } from "@material-tailwind/react";
 import {
-
     Card,
     CardHeader,
     CardBody,
     CardFooter,
-
 } from "@material-tailwind/react";
 
-// import useBiodatas from "../../hooks/useBiodatas";  CardFooter
+
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import useBiodatas from "../../hooks/useBiodatas";
@@ -26,19 +20,13 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useFavourites from "../../hooks/useFavourites";
 
-// import { useLoaderData } from "react-router-dom";
-// import useBiodataDetails from "../../hooks/useBiodataDetails";
+
 
 
 
 
 const BiodataDetails = () => {
 
-
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleOpen = () => setOpen(!open);
     const { user } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -56,19 +44,19 @@ const BiodataDetails = () => {
                 profileImage: user.downloadURL,
             }
             axiosSecure.post('/favourites', favouritesItem)
-            .then(res => {
-                console.log(res.data)
-                if(res.data.insertedId){
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${name} added to your favouri parson`,
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      refetch(); 
-                }
-            })
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `${name} added to your favouri parson`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        refetch();
+                    }
+                })
         }
         else {
             Swal.fire({
@@ -82,8 +70,8 @@ const BiodataDetails = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // user to the login page
-                    navigate('/login', { state: {from: location}})
-                    
+                    navigate('/login', { state: { from: location } })
+
                 }
             });
         }
@@ -97,7 +85,7 @@ const BiodataDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/biodatasAll/${id}`)
+        fetch(`http://localhost:5000/biodatasDetails/${id}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -105,100 +93,77 @@ const BiodataDetails = () => {
             });
     }, [id]);
 
-    // const biodataAll = useLoaderData();
-    // const { name, age, weight, biodataType, fathersName, mothersName } = biodataAll;
-    const { _id, name } = biodataDetails
+    const { _id, biodataId, name, profileImage, gender, email, mobileNumber } = biodataDetails
+
     return (
 
         <div>
-            <h1 className='font-bold text-2xl my-10'>Biodata Details</h1>
+            
+            <Link to='/biodatasPage'>
+                <Button className="h-8 bg-black text-white mb-10 "  >Back</Button>
+            </Link>
 
 
             <div className='grid grid-cols-4 gap-4'>
                 {/* Details */}
 
                 <div className='col-span-3 '>
-                    <Card className="w-full max-w-auto flex-row rounded-none  ">
+                    <Card className="w-full max-w-auto flex-row rounded-none h-[450px]  ">
                         <CardHeader
                             shadow={false}
                             floated={false}
-                            className="m-0 w-2/5 shrink-0 rounded-none"
-                        >
+                            className="m-0 w-2/5 shrink-0 rounded-none">
                             <img
-                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                                src={profileImage}
                                 alt="card-image"
-                                className="h-full w-full object-cover"
-                            />
+                                className="h-full w-full object-cover" />
                         </CardHeader>
                         <CardBody className=" p-5">
-                            <Typography variant="h6" color="gray" className="mb-4 uppercase">
-                                Name:{name}
+
+
+                            <Typography variant="h4" color="blue-gray" className="mb-4">
+                                Name : {name}
+                            </Typography>
+                            <Typography color="gray" className="mb-2 font-normal">
+                                Email : {email}
+                            </Typography>
+                            <Typography color="gray" className="mb-2 font-normal">
+                                Mobile Number : {mobileNumber}
+                            </Typography>
+                            <Typography color="gray" className="mb-2 font-normal">
+                                Gender : {gender}
+                            </Typography>
+                            <Typography variant="h6" color="gray" className="mb-2 uppercase">
+                                ID : {biodataId}
                             </Typography>
 
-                            <Typography variant="h4" color="blue-gray" className="mb-2">
-                                Lyft launching cross-platform service this week
-                            </Typography>
-                            <Typography color="gray" className="mb-8 font-normal">
-                                Like so many organizations these days, Autodesk is a company in
-                                transition. It was until recently a traditional boxed software company
-                                selling licenses. Yet its own business model disruption is only part
-                                of the story
-                            </Typography>
-                            <a href="#buttons-with-link">
-                                <Button onClick={handleFavourites} variant="outlined">Favourites</Button>
-                            </a>
-                            <Link to={`/checkoutPage/${_id}`}>
-                                <Button variant="outlined">Checkout Page</Button>
-                            </Link>
-
-
-                            <div className="w-[500px] mt-60">
-                                <div className="w-[500px]">
-                                    <Button onClick={handleOpen}>Long Dialog</Button>
-                                    <Dialog className="mt-60 bg-none" open={open} handler={handleOpen} >
-                                        <DialogHeader >Checkout Page</DialogHeader>
-                                        <DialogBody className="h-fit w-full overflow-scroll  ">
-                                            <Typography className="font-normal text-center">
-                                                I&apos;ve always had unwavering confidence in my abilities, and I
-                                                believe our thoughts and self-perception are the primary forces that
-                                                shape us. Many people limit themselves by their own self-doubt,
-                                                slowing their progress. Fortunately, I was raised with the belief
-                                                that I could achieve anything.
-
-                                            </Typography>
-                                        </DialogBody>
-                                        <DialogFooter className="space-x-2">
-                                            <Button variant="text" color="blue-gray" onClick={handleOpen}>
-                                                cancel
-                                            </Button>
-                                            <Button variant="gradient" color="green" onClick={handleOpen}>
-                                                confirm
-                                            </Button>
-                                        </DialogFooter>
-                                    </Dialog>
-                                </div>
-
+                            <div className="mt-40">
+                                <Link to={`/checkoutPage/${_id}`}>
+                                    <Button variant="outlined  " className=" bg-black h-8 text-white" >Checkout</Button>
+                                </Link>
+                                <Button className="h-8 bg-black text-white  " onClick={handleFavourites} >Favourites</Button>
                             </div>
-
 
                         </CardBody>
                     </Card>
                 </div>
 
-
+                {/* biodata hook thiaka data paitace */}
                 {biodataDetailsAll.map((biodata) => (
                     <div key={biodata._id} className='col-span-4 sm:col-span-2 md:col-span-1'>
                         <Card>
                             <CardHeader shadow={false} floated={false} className="h-56 rounded-none mt-0 mb-4">
                                 <img
-                                    src={biodata.profileImageLink}
+                                    src={biodata.profileImage}
                                     alt={biodata.name}
-                                    className="h-full w-full object-cover"
-                                />
+                                    className="h-full w-full object-cover" />
                             </CardHeader>
                             <CardBody className="pl-3">
                                 <Typography color="blue-gray" className="font-medium">
                                     {biodata.name}
+                                </Typography>
+                                <Typography color="blue-gray" className="font-medium">
+                                    Age: {biodata.biodataId}
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
                                     Age: {biodata.age}

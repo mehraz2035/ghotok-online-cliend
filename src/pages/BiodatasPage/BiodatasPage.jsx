@@ -32,7 +32,7 @@ const BiodatasPage = () => {
             </Helmet>
             <h1 className='font-bold text-2xl my-10'>Biodatas page</h1>
             <div className='grid grid-cols-4 gap-4'>
-                <div className="grid h-36">
+                {/* <div className="grid h-36">
 
 
                     <label className="p-2 h-14">
@@ -77,21 +77,35 @@ const BiodatasPage = () => {
                             <option value="Sylhet">Sylhet</option>
                         </select>
                     </label>
-                </div>
+                </div> */}
                 <div className=' col-span-3 grid grid-cols-3 gap-5'>
                     {biodatasPage.map((biodata) => (
                         <Card key={biodata._id} className=" w-fit rounded-none " >
                             <CardBody>
                                 <CardHeader floated={false} className="h-fit rounded-none">
-                                    <img src="https://img.freepik.com/free-photo/couple-walking-beach_23-2148111706.jpg" alt="profile-picture" />
+                                    <img src={biodata.profileImage
+                                    } alt="profile-picture" />
                                 </CardHeader>
                                 <div className="px-5">
                                     <Typography variant="h5" color="blue-gray" className="my-2">
-                                        UI/UX Review Check
+                                        {biodata.name}
                                     </Typography>
                                     <Typography>
-                                        Because it&apos;s about motivating the doers. Because I&apos;m here to
-                                        follow my dreams and inspire others.
+                                        ID : {biodata.biodataId}
+                                    </Typography>
+                                    <Typography>
+                                        Gendar : {biodata.
+
+                                            gender}
+                                    </Typography>
+                                    <Typography>
+                                        Permanent Division : {biodata.permanentDivision}
+                                    </Typography>
+                                    <Typography>
+                                        Age : {biodata.age}
+                                    </Typography>
+                                    <Typography>
+                                        Occupation : {biodata.occupation}
                                     </Typography>
                                 </div>
                             </CardBody>
@@ -99,7 +113,7 @@ const BiodatasPage = () => {
 
                                 <Link to={`/biodataDetails/${biodata._id}`}>
                                     <Button size="sm" variant="text" className="flex items-center gap-2">
-                                        Learn More
+                                        View Profile
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"

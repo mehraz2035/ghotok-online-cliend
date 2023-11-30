@@ -7,7 +7,6 @@ import BiodatasPage from "../pages/BiodatasPage/BiodatasPage";
 import BiodataDetails from "../pages/BiodataDetails/BiodataDetails";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import PrivateRoute from "./PrivateRoute";
 import DashBoard from "../Layout/DashBoard";
 import EditBiodata from "../pages/DashBoard/EditBiodata/EditBiodata";
 import ViewBiodata from "../pages/DashBoard/ViewBiodata/ViewBiodata";
@@ -17,6 +16,7 @@ import AdminDashboard from "../pages/DashBoard/AdminDashboard/AdminDashboard";
 import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
 import ApprovedContactRequest from "../pages/DashBoard/approvedContactRequest/ApprovedContactRequest";
 import CheckoutPage from "../pages/BiodataDetails/CheckoutPage";
+import AdminApprovedPremium from "../pages/DashBoard/AdminApprovedPremium/AdminApprovedPremium";
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: 'manageUsers',
         element: <ManageUsers></ManageUsers>
+      },
+      {
+        path: 'adminApprovedPremium',
+        element: <AdminApprovedPremium></AdminApprovedPremium>
       },
       {
         path: 'approvedContactRequest',

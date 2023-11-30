@@ -44,7 +44,7 @@ const EditBiodata = () => {
             const mobileNumber = form.mobileNumber.value;
 
 
-            const editProfile = {
+            const editBiodata = {
                 gender,
                 profileImage,
                 name,
@@ -67,9 +67,15 @@ const EditBiodata = () => {
 
             };
 
-            console.log(editProfile);
+            console.log(editBiodata);
 
-            axios.put(`http://localhost:5000/userEdit/${user.email}`, editProfile)
+            axios.put(`http://localhost:5000/userEdit/${user.email}`, editBiodata)
+                .then(res => {
+                    console.log(res.data)
+
+                })
+
+            axios.post(`http://localhost:5000/bio-data/`, editBiodata)
                 .then(res => {
                     console.log(res.data)
                 })
@@ -85,162 +91,156 @@ const EditBiodata = () => {
     }
     return (
         <div className="m-20">
-            <h1 className=" text-center font-bold ">Edit Biodata</h1>
+            <h1 className=" text-center font-bold my-10">Edit Biodata Now</h1>
 
-            {editBiodata.map((editBio) => (
-                <div key={editBio._id} >
-                    <h1>{editBio.name}</h1>
-                    <h1>{editBio.email}</h1>
-                    <img src={editBio.
-                        profileImage
-                    } alt="" />
-                </div>
-            ))}
 
-            <div className="border-2 w-full">
-                <form onSubmit={handleUpdate} >
-                    <div >
-                        <label>
-                            <span>Gender</span>
-                        </label>
-                        <select name="gender" placeholder="Gender"  required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option >
-                            <option value="all">All</option>
-                        </select>
-                    </div>
-                    <div >
-                        <label >
-                            <span>Name</span>
-                        </label>
-                        <input type="text" name="name" placeholder="Name"  />
-                    </div>
-                    <div >
-                        <label >
-                            <span >Profile Image Link </span>
-                        </label>
-                        <input type="text" name="profileImage" placeholder="URL" />
-                    </div>
-                    <div>
-                        <label >
-                            <span>Date of birth</span>
-                        </label>
-                        <input type="date" name="dateofbirth" placeholder="Food Image"  required />
-                    </div>
-                    <div >
-                        <label >
-                            <span > Height</span>
-                        </label>
-                        <input type="number" name="height" placeholder="Height"  required />
-                    </div>
-                    <div >
-                        <label>
-                            <span>Weight</span>
-                        </label>
-                        <input type="number" name="weight" placeholder="Weight"  required />
-                    </div>
-                    <div >
-                        <label >
-                            <span >Age</span>
-                        </label>
-                        <input type="number" name="age" placeholder="Age"  />
-                    </div>
-                    <div>
-                        <label>
-                            <span >Occupation</span>
-                        </label>
-                        <select name="occupation" placeholder="Occupation"  required>
-                            <option value="student">Student</option>
-                            <option value="job">Job</option >
-                            <option value="houseWife">House wife</option>
-                        </select>
-                    </div>
-                    <div >
-                        <label >
-                            <span >Race</span>
-                        </label>
-                        <select name="race" placeholder="Race" required>
-                            <option value="bangali">Bangali</option>
-                            <option value="chakma">Chakma</option >
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div >
-                        <label >
-                            <span >Fathers Name</span>
-                        </label>
-                        <input type="text" name="fathersName" placeholder="Fathers Name" />
-                    </div>
-                    <div >
-                        <label >
-                            <span >Mothers name</span>
-                        </label>
-                        <input type="text" name="mothersName" placeholder="Mothers name" />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Permanent Division</span>
-                        </label>
-                        <select required name="permanentDivision" >
-                            <option value="dhaka">Dhaka</option>
-                            <option value="chattagram">Chattagram</option >
-                            <option value="rangpur">Rangpur</option>
-                            <option value="barisal">Barisal</option>
-                            <option value="khulna">Khulna</option>
-                            <option value="maymansign">Maymansign</option>
-                            <option value="sylhet">Sylhet</option>
 
-                        </select>
-                    </div>
-                    <div >
-                        <label >
-                            <span className="label-text">Present Division</span>
-                        </label>
-                        <select required name="presentDivision" >
-                            <option value="dhaka">Dhaka</option>
-                            <option value="chattagram">Chattagram</option >
-                            <option value="rangpur">Rangpur</option>
-                            <option value="barisal">Barisal</option>
-                            <option value="khulna">Khulna</option>
-                            <option value="maymansign">Maymansign</option>
-                            <option value="sylhet">Sylhet</option>
+            <div className="border-2 w-[700px]">
+                <form onSubmit={handleUpdate} className="max-w-xxl  mx-auto p-6 bg-white rounded-md shadow-md ">
+                    <div className=" grid grid-cols-2  ">
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span>Gender</span>
+                            </label>
+                            <select name="gender" placeholder="Gender" defaultValue={user.gender} required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option >
+                                <option value="Other">All</option>
+                            </select>
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2" >
+                                <span>Name</span>
+                            </label>
+                            <input type="text" name="name" placeholder="Name" defaultValue={user.name} />
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span >Profile Image Link </span>
+                            </label>
+                            <input type="text" name="profileImage" placeholder="URL" defaultValue={user.profileImage} />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span>Date of birth</span>
+                            </label>
+                            <input type="date" name="dateofbirth" placeholder="Date of birth" defaultValue={user.dateofbirth} required />
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2" >
+                                <span > Height</span>
+                            </label>
+                            <input type="number" name="height" placeholder="Height" defaultValue={user.height} required />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span>Weight</span>
+                            </label>
+                            <input type="number" name="weight" placeholder="Weight" defaultValue={user.weight} required />
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2" >
+                                <span >Age</span>
+                            </label>
+                            <input type="number" name="age" placeholder="Age" defaultValue={user.age} />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span >Occupation</span>
+                            </label>
+                            <select name="occupation" placeholder="Occupation" defaultValue={user.occupation} required>
+                                <option value="Student">Student</option>
+                                <option value="Job">Job</option >
+                                <option value="House wife">House wife</option>
+                            </select>
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2" >
+                                <span >Race</span>
+                            </label>
+                            <select name="race" placeholder="Race" defaultValue={user.age} required>
+                                <option value="Bangali">Bangali</option>
+                                <option value="Chakma">Chakma</option >
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2" >
+                                <span >Fathers Name</span>
+                            </label>
+                            <input type="text" name="fathersName" placeholder="Fathers Name" defaultValue={user.fathersName} />
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span >Mothers name</span>
+                            </label>
+                            <input type="text" name="mothersName" placeholder="Mothers name" defaultValue={user.mothersName} />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span className="label-text">Permanent Division</span>
+                            </label>
+                            <select required name="permanentDivision" defaultValue={user.permanentDivision}>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Chattagram">Chattagram</option >
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Barisal">Barisal</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Maymansign">Maymansign</option>
+                                <option value="Sylhet">Sylhet</option>
 
-                        </select>
+                            </select>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span className="label-text">Present Division</span>
+                            </label>
+                            <select required name="presentDivision" defaultValue={user.presentDivision} >
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Chattagram">Chattagram</option >
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Barisal">Barisal</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Maymansign">Maymansign</option>
+                                <option value="Sylhet">Sylhet</option>
 
-                    </div>
+                            </select>
 
-                    <div >
-                        <label >
-                            <span>Expected Partner Age</span>
-                        </label>
-                        <input type="number" name="expectedPartnerAge" placeholder="Age"  />
+                        </div>
+
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span>Expected Partner Age</span>
+                            </label>
+                            <input type="number" name="expectedPartnerAge" placeholder="Age" defaultValue={user.expectedPartnerAge} />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span >Expected Partner Height</span>
+                            </label>
+                            <input type="number" name="expectedPartnerHeight" placeholder="Height" defaultValue={user.expectedPartnerHeight} required />
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span>Expected Partner Weight</span>
+                            </label>
+                            <input type="number" name="expectedPartnerWeight" placeholder="Weight" defaultValue={user.expectedPartnerWeight} required />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" >
+                                <span >Contact Email</span>
+                            </label>
+                            <input type="email" name="email" defaultValue={user?.email} placeholder="Mobile Number" readOnly />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span className="label-text">Mobile Number</span>
+                            </label>
+                            <input type="number" name="mobileNumber" placeholder="Mobile Number" defaultValue={user.mobileNumber} required />
+                        </div>
                     </div>
-                    <div>
-                        <label >
-                            <span >Expected Partner Height</span>
-                        </label>
-                        <input type="number" name="expectedPartnerHeight" placeholder="Height"  required />
-                    </div>
-                    <div >
-                        <label >
-                            <span>Expected Partner Weight</span>
-                        </label>
-                        <input type="number" name="expectedPartnerWeight" placeholder="Weight" required />
-                    </div>
-                    <div >
-                        <label >
-                            <span >Contact Email</span>
-                        </label>
-                        <input type="email" name="email" defaultValue={user?.email} placeholder="Mobile Number"  readOnly />
-                    </div>
-                    <div >
-                        <label >
-                            <span className="label-text">Mobile Number</span>
-                        </label>
-                        <input type="number" name="mobileNumber" placeholder="Mobile Number"  required />
-                    </div>
-                    <div >
-                        <input className="btn btn-warning" type="submit" value="Publish " />
+                    <div className=" flex justify-center mt-10  ">
+                        <input type="submit" value="Publish " className="border-2 border-black p-2 font-bold" />
                     </div>
                 </form>
             </div>
