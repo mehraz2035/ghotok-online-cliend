@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
+import { data } from "autoprefixer";
 
 const ViewBiodata = () => {
     const { user } = useContext(AuthContext);
-
     const [viewBiodata, setViewBiodata] = useState([]);
+
     const url = `http://localhost:5000/userEdit?email=${user?.email}`;
 
     useEffect(() => {
@@ -14,6 +15,8 @@ const ViewBiodata = () => {
             .then(res => res.json())
             .then(data => setViewBiodata(data))
     }, [url]);
+
+    const {_id, status} =viewBiodata;
 
     const handlePremium = (email) => {
 
@@ -24,10 +27,40 @@ const ViewBiodata = () => {
 
     }
 
+    // const handlePremium = id => {
+    //     fetch(`http://localhost:5000/makePremium/${id}`, {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify({status: 'premium'})
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         if(data.modifiedCount > 0) {
+    //             //  update
+    //             const remaining = viewBiodata.filter(viewBio => viewBio._id !== id);
+    //              const updated = viewBiodata.find(viewBio => viewBio._id == id);
+    //              updated.status = 'confirm'
+    //              const newViewBiodata = [updated, ...remaining];
+    //              setViewBiodata(newViewBiodata);
+
+                 
+    //         }
+    //     })    
+    // }
+
     return (
         <div>
             <h1 className=" text-center font-bold my-10">View Biodata</h1>
-            <table className="table-auto  mt-24 ">
+            <div className="my-10 flex justify-center items-center font-bold ">
+                <h1>Do you want to premium your profile?</h1>
+                <div className="flex items-center ">
+                    <Button onClick={() => handlePremium(user?.email)} className=" bg-black h-10 ml-5">Yes! Premium</Button>
+                </div>
+            </div>
+            <table className="table-auto mb-10 ">
                 <thead className="border border-black">
                     <tr className="border border-black">
                         <th className="border px-4 py-2 w-[200px]">USER DATA</th>
@@ -125,6 +158,14 @@ const ViewBiodata = () => {
                             <td className="border px-4 py-2">Mobile Number</td>
                             <td className="border px-4 py-2">{item.mobileNumber}</td>
                         </tr>
+                        <tr className="border border-black">
+                            <td className="border px-4 py-2">Status</td>
+                            <td className="border px-4 py-2">{item.status}</td>
+                        </tr>
+                        <tr className="border border-black">
+                            <td className="border px-4 py-2">Married Status</td>
+                            <td className="border px-4 py-2">{item.married}</td>
+                        </tr>
 
 
 
@@ -133,12 +174,7 @@ const ViewBiodata = () => {
 
 
             </table>
-            <div className="my-10 flex justify-center items-center font-bold ">
-                <h1>Do you want to premium your profile?</h1>
-                <div className="flex items-center ">
-                    <Button onClick={() => handlePremium(user?.email)} className=" bg-black h-10 ml-5">Yes! Premium</Button>
-                </div>
-            </div>
+
         </div>
     );
 };

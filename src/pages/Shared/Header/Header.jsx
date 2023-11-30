@@ -21,8 +21,8 @@ const Header = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/biodatasPage'>Biodatas</Link></li>
         
-        <li><Link to='/addFood'>About Us</Link></li>
-        <li><Link to='/userBaseManagesFoods'>Contact Us +{favourite.length}</Link></li>
+        <li><Link to='/aboutUs'>About Us</Link></li>
+        <li><Link to='/contactUs'>Contact Us</Link></li>
         {user?.email && (
             <li><Link to='/dashboard'>Dashboard</Link></li>
         )}

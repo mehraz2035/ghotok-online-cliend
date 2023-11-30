@@ -37,7 +37,7 @@ const handleMakeAdmin = userAll => {
         <div>
             <div>
                 <h1 className=" text-center font-bold my-10">Manage Users</h1>
-                <h1>All user {userAll?.length}</h1>
+                
 
                 <table className="text-center ">
                     <thead className="border-2">

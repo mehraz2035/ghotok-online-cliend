@@ -56,10 +56,10 @@ const FavouritesBiodata = () => {
                     favouritesBiodata.map(itam => <tbody key={itam._id} className="text-center">
 
                         <th className="border-2  border-black p-2"><tr>{itam.name}</tr> </th>
-                        <th className="border-2  border-black p-2"><tr>{itam._id}</tr></th>
+                        <th className="border-2  border-black p-2"><tr>{itam.biodataId}</tr></th>
                         <th className="border-2  border-black p-2"><tr>{itam.permanentDivision}</tr></th>
                         <th className="border-2  border-black p-2"><tr>{itam.occupation}</tr></th>
-                        <th className="border-2  border-black p-2"><tr onClick={() => handleDelete(itam._id)}>Delete</tr></th>
+                        <th className="border-2  border-black p-2"><button className="bg-black h-8 px-4  text-white" onClick={() => handleDelete(itam._id)}>Delete</button></th>
 
                     </tbody>
                     )

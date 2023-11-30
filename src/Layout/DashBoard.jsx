@@ -1,16 +1,30 @@
+
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+
 
 
 const DashBoard = () => {
+    const [isAdmin, setAdmin] = useState({})
+    const { user } = useAuth()
 
-    const isAdmin = true;
+    useEffect(() => {
+        axios.get(`http://localhost:5000/get-admin/${user?.email}`)
+            .then(res => {
+                setAdmin(res.data)
+            })
+    }, [user?.email])
+
+
     return (
         <div className="flex">
             {/* side bar */}
-            <div className="w-64 mr-40 min-h-screen bg-[#213555] text-white py-4">
-                <ul className="p-4">
+            <div className=" mr-20 lg:mr-40 min-h-screen  bg-[#213555] text-white py-4">
+                <ul className="p-4 m-5 uppercase font-bold text-lg ">
                     {
-                        isAdmin ? <>
+                        isAdmin?.Admin ===true ? <>
                             <li>
                                 <NavLink to='/dashBoard/adminDashboard'>Admin Dashboard</NavLink>
                             </li>
@@ -19,7 +33,7 @@ const DashBoard = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashBoard/adminApprovedPremium'>Admin Approved Premium
+                                <NavLink to='/dashBoard/adminApprovedPremium'> Approved Premium
                                 </NavLink>
                             </li>
                             <li>
@@ -38,6 +52,11 @@ const DashBoard = () => {
                                 </li>
                                 <li>
                                     <NavLink to='/dashBoard/favouritesBiodata'>Favourites Biodata</NavLink>
+                                
+                                </li>
+                                <li>
+                                    <NavLink to='/dashBoard/gotMarried'>Got Married</NavLink>
+                                
                                 </li>
                             </>
                     }
@@ -45,11 +64,13 @@ const DashBoard = () => {
 
 
 
-                    <div className="border"></div>
+                    <div className="border my-6"></div>
 
                     <li>
                         <NavLink to='/'>Home</NavLink>
                     </li>
+
+
                 </ul>
             </div>
             {/* content */}

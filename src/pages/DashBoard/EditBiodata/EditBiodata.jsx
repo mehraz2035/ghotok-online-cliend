@@ -38,6 +38,7 @@ const EditBiodata = () => {
             const mothersName = form.mothersName.value;
             const permanentDivision = form.presentDivision.value;
             const presentDivision = form.presentDivision.value;
+            const married = form.married.value;
             const expectedPartnerAge = form.expectedPartnerAge.value;
             const expectedPartnerHeight = form.expectedPartnerHeight.value;
             const expectedPartnerWeight = form.expectedPartnerWeight.value;
@@ -58,6 +59,7 @@ const EditBiodata = () => {
                 mothersName,
                 permanentDivision,
                 presentDivision,
+                married,
                 expectedPartnerAge,
                 expectedPartnerHeight,
                 expectedPartnerWeight,
@@ -210,6 +212,17 @@ const EditBiodata = () => {
 
                         <div className="mt-4" >
                             <label className="block text-gray-700 text-sm font-bold mb-2">
+                                <span>Are you married?</span>
+                            </label>
+                            <select required name="married" defaultValue={user.married} >
+                                <option value="Married">Married</option>
+                                <option value="ChattagramSingle">Single</option >
+                                
+
+                            </select>
+                        </div>
+                        <div className="mt-4" >
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
                                 <span>Expected Partner Age</span>
                             </label>
                             <input type="number" name="expectedPartnerAge" placeholder="Age" defaultValue={user.expectedPartnerAge} />
@@ -240,9 +253,10 @@ const EditBiodata = () => {
                         </div>
                     </div>
                     <div className=" flex justify-center mt-10  ">
-                        <input type="submit" value="Publish " className="border-2 border-black p-2 font-bold" />
+                        <input type="submit"  value="Publish " className="border-2 border-black w-full p-2 font-bold text-white uppercase  bg-black h-10" />
                     </div>
                 </form>
+            
             </div>
 
 

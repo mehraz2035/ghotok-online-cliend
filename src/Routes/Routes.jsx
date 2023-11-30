@@ -17,6 +17,9 @@ import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
 import ApprovedContactRequest from "../pages/DashBoard/approvedContactRequest/ApprovedContactRequest";
 import CheckoutPage from "../pages/BiodataDetails/CheckoutPage";
 import AdminApprovedPremium from "../pages/DashBoard/AdminApprovedPremium/AdminApprovedPremium";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import GotMarried from "../pages/GotMarried/GotMarried";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +50,16 @@ export const router = createBrowserRouter([
       {
         path: '/checkoutPage/:id',
         element: <CheckoutPage></CheckoutPage>
+      },
+      {
+        path: 'contactUs',
+        element: <ContactUs></ContactUs>
+      },
+      {
+        path: 'aboutUs',
+        element: <AboutUs></AboutUs>
       }
+
     ]
   },
   {
@@ -69,6 +81,10 @@ export const router = createBrowserRouter([
       {
         path: 'favouritesBiodata',
         element: <FavouritesBiodata></FavouritesBiodata>
+      },
+      {
+        path: 'gotMarried',
+        element: <GotMarried></GotMarried>  
       },
       {
         path: 'adminDashboard',

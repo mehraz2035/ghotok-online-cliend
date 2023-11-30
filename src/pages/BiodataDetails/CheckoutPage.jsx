@@ -4,6 +4,7 @@ import { Card, Input, Typography, } from "@material-tailwind/react";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 
@@ -46,7 +47,8 @@ const CheckoutPage = () => {
             stripeNumber,
             name,
             status,
-            mobileNumber
+            mobileNumber,
+            request: 'Pending'
         }
         console.log(contactRequest);
 
@@ -64,14 +66,28 @@ const CheckoutPage = () => {
 
         axios.post('http://localhost:5000/contactRequests',contactRequest)
         .then(res=>{
-            console.log(res.data)
+            // console.log(res.data)
             if(res.data.insertedId){
-                alert('success')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Submit  success",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+
             }
         })
+
+     
     }
 
-
+const handleRequest = () =>{
+    axios.post(`http://localhost:5000/request-status/${user?.email}`, {requst: 'Pending'})
+    .then(res=>{
+     console.log(res.data)
+    })
+}
 
     return (
 
@@ -146,6 +162,7 @@ const CheckoutPage = () => {
                         <Input
                             type="submit"
                             value='Submit'
+                            onClick={handleRequest}
                             className="bg-black text-xl font-bold text-white"
                             labelProps={{
                                 className: "before:content-none after:content-none mt-6",

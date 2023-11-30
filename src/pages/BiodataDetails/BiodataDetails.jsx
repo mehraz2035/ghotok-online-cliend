@@ -11,7 +11,7 @@ import {
 } from "@material-tailwind/react";
 
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import useBiodatas from "../../hooks/useBiodatas";
 import useAuth from "../../hooks/useAuth";
@@ -19,6 +19,8 @@ import Swal from "sweetalert2";
 
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useFavourites from "../../hooks/useFavourites";
+import axios from "axios";
+import { AuthContext } from "../../providers/AuthProvider";
 
 
 
@@ -38,10 +40,12 @@ const BiodataDetails = () => {
             // add favourites data base 
             console.log(user.email);
             const favouritesItem = {
-                favouritesItemId: _id,
+                biodataId,
                 email: user.email,
                 name,
                 profileImage: user.downloadURL,
+                occupation,
+                permanentDivision,
             }
             axiosSecure.post('/favourites', favouritesItem)
                 .then(res => {
@@ -50,7 +54,7 @@ const BiodataDetails = () => {
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
-                            title: `${name} added to your favouri parson`,
+                            title: `${name} added to your favourit parson`,
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -77,11 +81,23 @@ const BiodataDetails = () => {
         }
     }
 
-    const [biodataDetailsAll] = useBiodatas();
+    // const [biodataDetailsAll] = useBiodatas();
 
     const { id } = useParams();
+
     const [biodataDetails, setBiodataDetails] = useState({});
+    const [users, setUsers] = useState([])
+    const [pusers, setPusers] = useState({})
     console.log(id)
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/get-premium/${user?.email}`)
+            .then(res => {
+                setPusers(res.data)
+                console.log(res.data)
+            })
+    }, [user?.email])
+
 
 
     useEffect(() => {
@@ -93,12 +109,20 @@ const BiodataDetails = () => {
             });
     }, [id]);
 
-    const { _id, biodataId, name, profileImage, gender, email, mobileNumber } = biodataDetails
+    const { _id, biodataId, name, profileImage, gender, email, mobileNumber, occupation, permanentDivision
+    } = biodataDetails
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/gender-filter/${gender}`)
+            .then(res => {
+                setUsers(res.data)
+            })
+    }, [gender])
 
     return (
 
         <div>
-            
+
             <Link to='/biodatasPage'>
                 <Button className="h-8 bg-black text-white mb-10 "  >Back</Button>
             </Link>
@@ -124,12 +148,20 @@ const BiodataDetails = () => {
                             <Typography variant="h4" color="blue-gray" className="mb-4">
                                 Name : {name}
                             </Typography>
-                            <Typography color="gray" className="mb-2 font-normal">
-                                Email : {email}
-                            </Typography>
-                            <Typography color="gray" className="mb-2 font-normal">
-                                Mobile Number : {mobileNumber}
-                            </Typography>
+                            {
+                                pusers?.Premium === true ?
+                                    <>
+                                        <Typography color="gray" className="mb-2 font-normal">
+                                            Email : {email}
+                                        </Typography>
+                                        <Typography color="gray" className="mb-2 font-normal">
+                                            Mobile Number : {mobileNumber}
+                                        </Typography>
+                                    </>
+                                    :
+                                    'Please Check Out to Get Data'
+                            }
+
                             <Typography color="gray" className="mb-2 font-normal">
                                 Gender : {gender}
                             </Typography>
@@ -138,9 +170,14 @@ const BiodataDetails = () => {
                             </Typography>
 
                             <div className="mt-40">
-                                <Link to={`/checkoutPage/${_id}`}>
-                                    <Button variant="outlined  " className=" bg-black h-8 text-white" >Checkout</Button>
-                                </Link>
+                                {
+                                    pusers.Premium === true ?
+                                        ''
+                                        :
+                                        <Link to={`/checkoutPage/${_id}`}>
+                                            <Button variant="outlined  " className=" bg-black h-8 text-white" >Checkout</Button>
+                                        </Link>
+                                }
                                 <Button className="h-8 bg-black text-white  " onClick={handleFavourites} >Favourites</Button>
                             </div>
 
@@ -149,7 +186,7 @@ const BiodataDetails = () => {
                 </div>
 
                 {/* biodata hook thiaka data paitace */}
-                {biodataDetailsAll.map((biodata) => (
+                {users?.map((biodata) => (
                     <div key={biodata._id} className='col-span-4 sm:col-span-2 md:col-span-1'>
                         <Card>
                             <CardHeader shadow={false} floated={false} className="h-56 rounded-none mt-0 mb-4">
@@ -160,7 +197,7 @@ const BiodataDetails = () => {
                             </CardHeader>
                             <CardBody className="pl-3">
                                 <Typography color="blue-gray" className="font-medium">
-                                    {biodata.name}
+                                    {biodata.gender}
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
                                     Age: {biodata.biodataId}

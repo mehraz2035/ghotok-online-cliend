@@ -16,11 +16,9 @@ const ApprovedContactRequest = () => {
 
     return (
         <div>
-            <h1 className=" text-center font-bold my-10">Manage Users</h1>
-            <h1 className=" text-center font-bold my-10">{contactRequests.length}</h1>
-            <h1 className=" text-center font-bold my-10">{contactRequests.email}</h1>
+            
 
-            <table className="text-center ">
+            <table className="text-center mt-32 ">
                 <thead className="border-2">
                     
                             <tr >

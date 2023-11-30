@@ -1,60 +1,62 @@
 
 
 
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const AdminDashboard = () => {
-    const [totalBiodata, setTotalBiodata] = useState(0);
-    const [girlsBiodata, setGirlsBiodata] = useState(0);
-    const [boysBiodata, setBoysBiodata] = useState(0);
-    const [marriagesCompleted, setMarriagesCompleted] = useState(0);
+    const [totalBiodataCount, setTotalBiodataCount] = useState(0);
+    const [femaleBiodataCount, setFemaleBiodataCount] = useState(0);
+    const [maleBiodataCount, setMaleBiodataCount] = useState(0);
+    const [marriagesCompletedCount, setMarriagesCompletedCount] = useState(0);
+    const [premiumUser, setPremiumUser] = useState(0)
+    const [moneyCounts, setMoneyCounts] = useState(0)
 
-    // Simulating data fetching from a server/database
     useEffect(() => {
-        // Replace this with actual API calls to fetch data
-        // For simplicity, using setTimeout to simulate an asynchronous operation
-        const fetchData = () => {
-            setTimeout(() => {
-                // Sample data
-                const fetchedData = {
-                    totalBiodata: 1000,
-                    girlsBiodata: 500,
-                    boysBiodata: 500,
-                    marriagesCompleted: 200,
-                };
-                
-                setTotalBiodata(fetchedData.totalBiodata);
-                setGirlsBiodata(fetchedData.girlsBiodata);
-                setBoysBiodata(fetchedData.boysBiodata);
-                setMarriagesCompleted(fetchedData.marriagesCompleted);
-            }, 1000); // Simulating a delay of 1 second
-        };
+        // Define your API endpoint
+        const apiUrl = 'http://localhost:5000/count-documents'; // Update this with your actual API endpoint
 
-        fetchData();
-    }, []);
+        // Fetch data from the API
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                setTotalBiodataCount(data.allBiodataCount || 0);
+                setFemaleBiodataCount(data.femaleBiodataCount || 0);
+                setMaleBiodataCount(data.maleBiodataCount || 0);
+                setMarriagesCompletedCount(data.marriagesCompletedCount || 0);
+                setPremiumUser(data.premiumUser || 0)
+
+                setMoneyCounts(data.moneyCount || 0)
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []); // Empty dependency array ensures useEffect runs once on component mount
+
+    const money = (moneyCounts * 500)
+
 
     return (
         <div className="counter-section flex justify-center items-center my-20 gap-16  py-14 bg-[#F3F3F3] uppercase">
             <div className="total-biodata text-center">
                 <h2 className="text-gray-700 text-2xl font-bold">Total Biodata</h2>
-                <p className="text-blue-500 text-4xl font-bold py-4">{totalBiodata}</p>
+                <p className="text-blue-500 text-4xl font-bold py-4">{totalBiodataCount}</p>
             </div>
             <div className="girls-biodata text-center">
-                <h2  className="text-gray-700  text-2xl font-bold">Girls Biodata</h2>
-                <p className="text-blue-500 text-4xl font-bold py-4">{girlsBiodata}</p>
+                <h2 className="text-gray-700  text-2xl font-bold">Girls Biodata</h2>
+                <p className="text-blue-500 text-4xl font-bold py-4">{femaleBiodataCount}</p>
             </div>
             <div className="boys-biodata text-center">
                 <h2 className="text-gray-700  text-2xl font-bold">Boys Biodata</h2>
-                <p className="text-blue-500 text-4xl font-bold py-4">{boysBiodata}</p>
+                <p className="text-blue-500 text-4xl font-bold py-4">{maleBiodataCount}</p>
             </div>
             <div className="marriages-completed text-center">
                 <h2 className="text-gray-700  text-2xl font-bold"> Premium biodata</h2>
-                <p className="text-blue-500 text-4xl font-bold py-4">{marriagesCompleted}</p>
+                <p className="text-blue-500 text-4xl font-bold py-4">{premiumUser}</p>
             </div>
             <div className="marriages-completed text-center">
                 <h2 className="text-gray-700  text-2xl font-bold"> Total revenue</h2>
-                <p className="text-blue-500 text-4xl font-bold py-4">{marriagesCompleted}</p>
+                <p className="text-blue-500 text-4xl font-bold py-4">{money}</p>
             </div>
         </div>
     );
