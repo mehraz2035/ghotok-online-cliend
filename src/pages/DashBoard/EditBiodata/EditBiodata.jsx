@@ -10,7 +10,7 @@ const EditBiodata = () => {
 
     const [editBiodata, setEditBiodata] = useState([]);
 
-    const url = `http://localhost:5000/userEdit?email=${user?.email}`;
+    const url = `https://ghotok-online-server.vercel.app/userEdit?email=${user?.email}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -71,13 +71,13 @@ const EditBiodata = () => {
 
             console.log(editBiodata);
 
-            axios.put(`http://localhost:5000/userEdit/${user.email}`, editBiodata)
+            axios.put(`https://ghotok-online-server.vercel.app/userEdit/${user.email}`, editBiodata)
                 .then(res => {
                     console.log(res.data)
 
                 })
 
-            axios.post(`http://localhost:5000/bio-data/`, editBiodata)
+            axios.post(`https://ghotok-online-server.vercel.app/bio-data/`, editBiodata)
                 .then(res => {
                     console.log(res.data)
                 })

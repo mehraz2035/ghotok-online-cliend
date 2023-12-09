@@ -17,12 +17,12 @@ const CheckoutPage = () => {
     const [userData, setUserData] = useState({})
     // console.log(id)
     useEffect(() => {
-        axios.get(`http://localhost:5000/users/indivitual/${user?.email}`)
+        axios.get(`https://ghotok-online-server.vercel.app/users/indivitual/${user?.email}`)
             .then(res => {
                 setUserData(res.data)
             })
 
-        fetch(`http://localhost:5000/biodatasDetails/${id}`)
+        fetch(`https://ghotok-online-server.vercel.app/biodatasDetails/${id}`)
             .then(res => res.json())
             .then(data => {
                 setCheckoutPage(data);
@@ -52,7 +52,7 @@ const CheckoutPage = () => {
         }
         console.log(contactRequest);
 
-        // fetch('http://localhost:5000/contactRequests', {
+        // fetch('https://ghotok-online-server.vercel.app/contactRequests', {
         //     method: 'POST',
         //     headers: {
         //         'content-type': 'application'
@@ -64,7 +64,7 @@ const CheckoutPage = () => {
         //         console.log(data);
         //     })
 
-        axios.post('http://localhost:5000/contactRequests',contactRequest)
+        axios.post('https://ghotok-online-server.vercel.app/contactRequests',contactRequest)
         .then(res=>{
             // console.log(res.data)
             if(res.data.insertedId){
@@ -83,7 +83,7 @@ const CheckoutPage = () => {
     }
 
 const handleRequest = () =>{
-    axios.post(`http://localhost:5000/request-status/${user?.email}`, {requst: 'Pending'})
+    axios.post(`https://ghotok-online-server.vercel.app/request-status/${user?.email}`, {requst: 'Pending'})
     .then(res=>{
      console.log(res.data)
     })

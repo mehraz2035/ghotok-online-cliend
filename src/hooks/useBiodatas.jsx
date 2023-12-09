@@ -5,7 +5,7 @@ const useBiodatas = () => {
     const [biodatasPage, setBiodatasPage] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/biodatasAllCart')
+        fetch('https://ghotok-online-server.vercel.app/biodatasAllCart')
             .then(res => res.json())
             .then(data => {
                 setBiodatasPage(data);

@@ -8,7 +8,7 @@ const SuccessCounter = () => {
 
   useEffect(() => {
     // Define your API endpoint
-    const apiUrl = 'http://localhost:5000/count-documents'; // Update this with your actual API endpoint
+    const apiUrl = 'https://ghotok-online-server.vercel.app/count-documents'; // Update this with your actual API endpoint
 
     // Fetch data from the API
     fetch(apiUrl)

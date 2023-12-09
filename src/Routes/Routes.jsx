@@ -20,6 +20,7 @@ import AdminApprovedPremium from "../pages/DashBoard/AdminApprovedPremium/AdminA
 import ContactUs from "../pages/ContactUs/ContactUs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import GotMarried from "../pages/GotMarried/GotMarried";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ export const router = createBrowserRouter([
       },
       {
         path: '/biodataDetails/:id',
-        element: <BiodataDetails></BiodataDetails>
-        // loader: ({params}) => fetch(`http://localhost:5000/biodatasAll/${params.id}`)
+        element: <PrivateRoute><BiodataDetails></BiodataDetails></PrivateRoute>
+        // loader: ({params}) => fetch(`https://ghotok-online-server.vercel.app/biodatasAll/${params.id}`)
       },
       {
         path: 'login',

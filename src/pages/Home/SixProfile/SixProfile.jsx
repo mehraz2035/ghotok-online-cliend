@@ -17,7 +17,7 @@ import axios from "axios";
     const [data, setData] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/premium-users')
+        axios.get('https://ghotok-online-server.vercel.app/premium-users')
           .then(res => {
             setData(res.data);
           })

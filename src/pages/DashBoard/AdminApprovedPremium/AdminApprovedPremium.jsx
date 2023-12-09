@@ -15,7 +15,7 @@ const AdminApprovedPremium = () => {
    const [pending, setPending] = useState([])
 
    useEffect(()=>{
-    axios.get('http://localhost:5000/pending-requst-user')
+    axios.get('https://ghotok-online-server.vercel.app/pending-requst-user')
     .then(res=>{
         setPending(res.data)
     })
@@ -23,7 +23,7 @@ const AdminApprovedPremium = () => {
 
     const handlePremium = (email) => {
 
-        axios.post(`http://localhost:5000/make-premium/${email}`, { status: 'Premium' })
+        axios.post(`https://ghotok-online-server.vercel.app/make-premium/${email}`, { status: 'Premium' })
             .then(res => {
                 console.log(res.data)
             })

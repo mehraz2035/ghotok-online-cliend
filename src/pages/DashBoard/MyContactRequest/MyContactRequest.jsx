@@ -13,7 +13,7 @@ const MyContactRequest = () => {
 
     const [myContactRequest, setMyContactRequest] = useState([]);
 
-    const url = `http://localhost:5000/emailBaseUser?email=${user?.email}`;
+    const url = `https://ghotok-online-server.vercel.app/emailBaseUser?email=${user?.email}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -34,7 +34,7 @@ const MyContactRequest = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/emailBaseUser/${id}`)
+                axios.delete(`https://ghotok-online-server.vercel.app/emailBaseUser/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                            

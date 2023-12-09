@@ -8,7 +8,7 @@ const ViewBiodata = () => {
     const { user } = useContext(AuthContext);
     const [viewBiodata, setViewBiodata] = useState([]);
 
-    const url = `http://localhost:5000/userEdit?email=${user?.email}`;
+    const url = `https://ghotok-online-server.vercel.app/userEdit?email=${user?.email}`;
 
     useEffect(() => {
         fetch(url)
@@ -20,7 +20,7 @@ const ViewBiodata = () => {
 
     const handlePremium = (email) => {
 
-        axios.post(`http://localhost:5000/make-premium/${email}`, { status: 'pending' })
+        axios.post(`https://ghotok-online-server.vercel.app/make-premium/${email}`, { status: 'pending' })
             .then(res => {
                 console.log(res.data)
             })
@@ -28,7 +28,7 @@ const ViewBiodata = () => {
     }
 
     // const handlePremium = id => {
-    //     fetch(`http://localhost:5000/makePremium/${id}`, {
+    //     fetch(`https://ghotok-online-server.vercel.app/makePremium/${id}`, {
     //         method: 'PATCH',
     //         headers: {
     //             'content-type': 'application/json'

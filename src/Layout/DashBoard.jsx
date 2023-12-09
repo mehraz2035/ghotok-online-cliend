@@ -11,7 +11,7 @@ const DashBoard = () => {
     const { user } = useAuth()
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/get-admin/${user?.email}`)
+        axios.get(`https://ghotok-online-server.vercel.app/get-admin/${user?.email}`)
             .then(res => {
                 setAdmin(res.data)
             })

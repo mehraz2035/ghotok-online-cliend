@@ -52,7 +52,7 @@ const SignUp = () => {
 
                             updateUserProfile(name, downloadURL)
                             const userInfo = {name, profileImage: downloadURL, email}
-                            axios.post('http://localhost:5000/users', userInfo)
+                            axios.post('https://ghotok-online-server.vercel.app/users', userInfo)
                             .then(res=>{
                                 console.log(res.data)
                                 if(res.data.insertedId){

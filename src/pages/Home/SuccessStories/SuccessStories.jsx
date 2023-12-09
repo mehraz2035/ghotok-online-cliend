@@ -24,7 +24,7 @@ const SuccessStories = () => {
     // const [married, setMarried] = useState([])
 
     // useEffect(() => {
-    //     axios.get('http://localhost:5000/get-married')
+    //     axios.get('https://ghotok-online-server.vercel.app/get-married')
     //         .then(res => {
     //             setMarried(res.data)
     //         })

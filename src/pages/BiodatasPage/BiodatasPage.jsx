@@ -20,7 +20,7 @@ const BiodatasPage = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/biodatasAllCart").then((res) => {
+    axios.get("https://ghotok-online-server.vercel.app/biodatasAllCart").then((res) => {
       setBiodatasPage(res.data);
     });
   }, []);

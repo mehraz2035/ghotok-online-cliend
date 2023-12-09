@@ -91,7 +91,7 @@ const BiodataDetails = () => {
     console.log(id)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/get-premium/${user?.email}`)
+        axios.get(`https://ghotok-online-server.vercel.app/get-premium/${user?.email}`)
             .then(res => {
                 setPusers(res.data)
                 console.log(res.data)
@@ -101,7 +101,7 @@ const BiodataDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/biodatasDetails/${id}`)
+        fetch(`https://ghotok-online-server.vercel.app/biodatasDetails/${id}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -113,7 +113,7 @@ const BiodataDetails = () => {
     } = biodataDetails
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/gender-filter/${gender}`)
+        axios.get(`https://ghotok-online-server.vercel.app/gender-filter/${gender}`)
             .then(res => {
                 setUsers(res.data)
             })
@@ -200,12 +200,12 @@ const BiodataDetails = () => {
                                     {biodata.gender}
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    Age: {biodata.biodataId}
+                                    ID: {biodata.biodataId}
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
                                     Age: {biodata.age}
                                 </Typography>
-                                <Typography color="blue-gray" className="font-medium">
+                            <Typography color="blue-gray" className="font-medium">
                                     Occupation: {biodata.occupation}
                                 </Typography>
                             </CardBody>
