@@ -1,6 +1,6 @@
 # Ghotok Online Biodata Website
 
-### Site live Link : [online-ghotok.web.app/](https://online-ghotok.web.app)
+### Site live Link : [online-ghotok.web.app](https://online-ghotok.web.app)
 
 
 ## Overview
